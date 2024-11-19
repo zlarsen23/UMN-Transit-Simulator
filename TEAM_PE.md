@@ -24,7 +24,9 @@ Establish your own additional team policies around the following aspects:
 
 #### Additional Expectations and Responsabilities
 **Step 2: Please, describe here (using as much text as you need) additional expections and responsabilities for this project iteration**.
+* All team members will have clear communication on what tasks they are doing and what help they may need
 
 ## Team Member Names
 **Step 3: Please enter your name. Each one of the team members should add the name through a different commit. For example, student A adds their name and commits, then student B adds their name and commits.**
--Matthew Xue
+- Matthew Xue
+- Zach Larsen
