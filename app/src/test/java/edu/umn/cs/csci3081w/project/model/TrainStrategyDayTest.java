@@ -46,4 +46,27 @@ public class TrainStrategyDayTest {
       assertEquals(DieselTrain.DIESEL_TRAIN_VEHICLE, strToCmpr);
     }
   }
+
+  /**
+   * Testing with negative number of diesel trains
+   */
+  @Test
+  public void testNegativeDieselTrainsNum() {
+    StorageFacility storageFacility = new StorageFacility(0, 0, 3, -1);
+    TrainStrategyDay trainStrategyDay = new TrainStrategyDay();
+    trainStrategyDay.getTypeOfVehicle(storageFacility);
+    trainStrategyDay.getTypeOfVehicle(storageFacility);
+    trainStrategyDay.getTypeOfVehicle(storageFacility);
+    assertEquals(trainStrategyDay.getTypeOfVehicle(storageFacility), null);
+  }
+
+  /**
+   * Testing with negative number of electric trains
+   */
+  @Test
+  public void testNegativeElectricTrainsNum() {
+    StorageFacility storageFacility = new StorageFacility(0, 0, -1, 0);
+    TrainStrategyDay trainStrategyDay = new TrainStrategyDay();
+    assertEquals(trainStrategyDay.getTypeOfVehicle(storageFacility), null);
+  }
 }

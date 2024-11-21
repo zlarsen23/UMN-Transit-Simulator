@@ -46,4 +46,27 @@ public class BusStrategyNightTest {
       assertEquals(LargeBus.LARGE_BUS_VEHICLE, strToCmpr);
     }
   }
+
+  /**
+   * Testing with negative number of large buses
+   */
+  @Test
+  public void testNegativeLargeBusNumber() {
+    StorageFacility storageFacility = new StorageFacility(3, -1, 0, 0);
+    BusStrategyNight busStrategyNight = new BusStrategyNight();
+    busStrategyNight.getTypeOfVehicle(storageFacility);
+    busStrategyNight.getTypeOfVehicle(storageFacility);
+    busStrategyNight.getTypeOfVehicle(storageFacility);
+    assertEquals(busStrategyNight.getTypeOfVehicle(storageFacility), null);
+  }
+
+  /**
+   * Testing with negative number of small buses
+   */
+  @Test
+  public void testNegativeSmallBusNumber() {
+    StorageFacility storageFacility = new StorageFacility(-1, 0, 0, 0);
+    BusStrategyNight busStrategyNight = new BusStrategyNight();
+    assertEquals(busStrategyNight.getTypeOfVehicle(storageFacility), null);
+  }
 }
