@@ -176,6 +176,7 @@ public class VehicleTest {
         + "* Passengers: 0" + System.lineSeparator()
         + "* CO2: 0" + System.lineSeparator();
     assertEquals(expectedText, observedText);
+
   }
 
   /**
@@ -184,6 +185,37 @@ public class VehicleTest {
   @AfterEach
   public void cleanUpEach() {
     testVehicle = null;
+  }
+
+  @Test
+  public void testUpdateWithPassengersLineIssue() {
+    testVehicle.getLine().createIssue();
+    Passenger testPassenger = new Passenger(1, "testPassenger");
+    testVehicle.loadPassenger(testPassenger);
+
+    testVehicle.update(); // Move and update passengers
+    assertEquals(1, testPassenger.getDestination());
+    assertEquals(0, testVehicle.getDistanceRemaining());
+    assertEquals(1, testVehicle.getPassengers().size());
+    assertEquals(testPassenger.getTimeOnVehicle(), 2);
+
+    testVehicle.getLine().setIssueNull();
+    testVehicle.update();
+    assertEquals(1, testPassenger.getDestination());
+    assertEquals(0.843774422231134, testVehicle.getDistanceRemaining());
+    assertEquals(0, testVehicle.getPassengers().size());
+  }
+
+  @Test
+  public void testMoveWithNoPassengers(){
+    Passenger testPassenger = new Passenger(1, "testPassenger");
+    testVehicle.loadPassenger(testPassenger);
+    assertEquals("test stop 2", testVehicle.getNextStop().getName());
+    assertEquals(1, testVehicle.getNextStop().getId());
+    testVehicle.move();
+    testVehicle.move();
+    testVehicle.move();
+    assertEquals(0.843774422231134, testVehicle.getDistanceRemaining());
   }
 
 }
