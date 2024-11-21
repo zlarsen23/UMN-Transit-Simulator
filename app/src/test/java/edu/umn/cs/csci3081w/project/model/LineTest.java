@@ -255,6 +255,16 @@ public class LineTest {
 
   }
 
+  @Test
+  public void testNullIssue() {
+
+    testLine.setIssueNull();
+    assertEquals(false,testLine.isIssueExist());
+
+    testLine.update();
+    assertEquals(false,testLine.isIssueExist());
+  }
+
   /**
    * Clean up our variables after each test.
    */
