@@ -1,7 +1,6 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import java.io.PrintStream;
-import java.util.Iterator;
 
 public class Line {
 
@@ -109,4 +108,6 @@ public class Line {
   public void createIssue() {
     this.issue.createIssue();
   }
+
+  public void setIssueNull() {this.issue = null;}
 }
