@@ -1,6 +1,12 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.webserver.WebServerSession;
@@ -8,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
+import org.mockito.Mockito.*;
 
 public class VehicleConcreteSubjectTest {
 
@@ -25,7 +35,7 @@ public class VehicleConcreteSubjectTest {
     PassengerFactory.DETERMINISTIC_NAMES_COUNT = 0;
     PassengerFactory.DETERMINISTIC_DESTINATION_COUNT = 0;
     RandomPassengerGenerator.DETERMINISTIC = true;
-    Vehicle.TESTING = true;
+    //Vehicle.TESTING = true;
     List<Stop> stopsIn = new ArrayList<Stop>();
     Stop stop1 = new Stop(0, "test stop 1", new Position(-93.243774, 44.972392));
     Stop stop2 = new Stop(1, "test stop 2", new Position(-93.235071, 44.973580));
@@ -97,12 +107,20 @@ public class VehicleConcreteSubjectTest {
    */
   @Test
   public void testNotifyObservers() {
+    WebServerSession webServerSessionSpy = spy(WebServerSession.class);
+    doNothing().when(webServerSessionSpy).sendJson(Mockito.isA(JsonObject.class));
+
     VehicleConcreteSubject vehicleConcreteSubject =
-        new VehicleConcreteSubject(new WebServerSession());
+        new VehicleConcreteSubject(webServerSessionSpy);
     vehicleConcreteSubject.attachObserver(testVehicle);
+
     testVehicle.update();
     vehicleConcreteSubject.notifyObservers();
-    JsonObject testOutput = testVehicle.getTestOutput();
+
+    ArgumentCaptor<JsonObject> captor = ArgumentCaptor.forClass(JsonObject.class);
+    verify(webServerSessionSpy).sendJson(captor.capture());
+    JsonObject testOutput = captor.getValue();
+
     String command = testOutput.get("command").getAsString();
     String expectedCommand = "observedVehicle";
     assertEquals(expectedCommand, command);
