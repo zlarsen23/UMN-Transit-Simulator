@@ -259,6 +259,13 @@ public class RouteTest {
     assertEquals(1, testRouteIn.getStops().get(1).getPassengers().get(0).getWaitAtStop());
   }
 
+  @Test
+  public void testGetLastStop(){
+    assertEquals("test stop",simpleTestRouteIn.prevStop().getName());
+    simpleTestRouteIn.nextStop();
+    assertEquals("test stop", simpleTestRouteIn.prevStop().getName());
+  }
+
   /**
    * Clean up our variables after each test.
    */
