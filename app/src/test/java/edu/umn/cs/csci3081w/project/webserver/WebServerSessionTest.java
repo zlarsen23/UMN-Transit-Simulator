@@ -1,22 +1,32 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.PassengerFactory;
 import edu.umn.cs.csci3081w.project.model.RandomPassengerGenerator;
 import edu.umn.cs.csci3081w.project.model.Vehicle;
+
+import javax.websocket.RemoteEndpoint;
 import javax.websocket.Session;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
+import java.util.Map;
+
 public class WebServerSessionTest {
+
+  private WebServerSession webServerSession;
+  private Session mockSession;
   /**
    * Setup deterministic operations before each test runs.
    */
@@ -26,7 +36,7 @@ public class WebServerSessionTest {
     PassengerFactory.DETERMINISTIC_NAMES_COUNT = 0;
     PassengerFactory.DETERMINISTIC_DESTINATION_COUNT = 0;
     RandomPassengerGenerator.DETERMINISTIC = true;
-    //Vehicle.TESTING = true;
+    //Vehicle.TESTING = true
   }
 
   /**
@@ -46,4 +56,19 @@ public class WebServerSessionTest {
     JsonObject commandToClient = messageCaptor.getValue();
     assertEquals("2", commandToClient.get("numLines").getAsString());
   }
+
+  @Test
+  public void testOnMessageWithValidCommand() {
+    WebServerSession webServerSession = spy(new WebServerSession());
+    doNothing().when(webServerSession).sendJson(any(JsonObject.class));
+    Session sessionMock = mock(Session.class);
+    webServerSession.onOpen(sessionMock);
+
+    JsonObject commandFromClient = new JsonObject();
+    commandFromClient.addProperty("command", "initLines");
+    webServerSession.onMessage(commandFromClient.toString());
+
+    verify(webServerSession, atLeastOnce()).sendJson(any(JsonObject.class));
+  }
+
 }
