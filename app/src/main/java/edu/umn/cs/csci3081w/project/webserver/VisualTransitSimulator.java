@@ -174,4 +174,8 @@ public class VisualTransitSimulator {
   public void addObserver(Vehicle vehicle) {
     vehicleConcreteSubject.attachObserver(vehicle);
   }
+
+  public void setLOGGING(boolean bool){LOGGING=bool;}
+
+  public int getSimulationTimeElapsed(){return simulationTimeElapsed;}
 }

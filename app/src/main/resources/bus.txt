@@ -1,0 +1,46 @@
+LINE_START, NO_LINE, City Loop
+
+ROUTE_START, North Bound
+
+STOP, Downtown Central, 44.970000, -93.260000, .2
+STOP, Riverfront Park, 44.965000, -93.255000, .15
+STOP, Uptown Market, 44.960000, -93.250000, .25
+STOP, Main Street, 44.955000, -93.245000, 0
+
+ROUTE_END
+
+ROUTE_START, South Bound
+
+STOP, Main Street, 44.955000, -93.245000, .25
+STOP, Uptown Market, 44.960000, -93.250000, .15
+STOP, Riverfront Park, 44.965000, -93.255000, .2
+STOP, Downtown Central, 44.970000, -93.260000, 0
+
+ROUTE_END
+
+LINE_END
+
+LINE_START, NO_LINE, University Shuttle
+
+ROUTE_START, Campus East
+
+STOP, Library, 44.975000, -93.230000, .1
+STOP, Student Union, 44.980000, -93.220000, .05
+STOP, Engineering Hall, 44.985000, -93.210000, 0
+
+ROUTE_END
+
+ROUTE_START, Campus West
+
+STOP, Engineering Hall, 44.985000, -93.210000, .1
+STOP, Student Union, 44.980000, -93.220000, .05
+STOP, Library, 44.975000, -93.230000, 0
+
+ROUTE_END
+
+LINE_END
+
+STORAGE_FACILITY_START
+
+
+STORAGE_FACILITY_END

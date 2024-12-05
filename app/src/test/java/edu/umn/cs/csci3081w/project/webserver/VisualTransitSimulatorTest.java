@@ -16,30 +16,10 @@ public class VisualTransitSimulatorTest {
 
   @BeforeEach
   public void setUp() {
+    mockSession = mock(WebServerSession.class);
     String configFile = "src/main/resources/config.txt";
-    Stop stop1 = new Stop(0, "Stop 1", new Position(44.972392, -93.243774));
-    Stop stop2 = new Stop(1, "Stop 2", new Position(44.973580, -93.235071));
-
-    List<Stop> stops = Arrays.asList(stop1, stop2);
-    List<Double> distances = Arrays.asList(0.843774422231134);
-    List<Double> probabilities = Arrays.asList(0.025, 0.3);
-    PassengerGenerator generator = new RandomPassengerGenerator(stops, probabilities);
-    Route outboundRoute = new Route(0, "Outbound", stops, distances, generator);
-    Route inboundRoute = new Route(1, "Inbound", stops, distances, generator);
-    Line busLine = new Line(10000, "Bus Line", Line.BUS_LINE, outboundRoute, inboundRoute, null);
-    Line trainLine = new Line(10001, "Train Line", Line.TRAIN_LINE, outboundRoute, inboundRoute, null);
-
-    lines = new ArrayList<>();
-    lines.add(busLine);
-    lines.add(trainLine);
-
-    // Create StorageFacility
-    storageFacility = new StorageFacility(0, 0, 0, 0);
-
-    // Initialize the simulator with the config file
     simulator = new VisualTransitSimulator(configFile, mockSession);
 
-    // Set vehicle factories with a starting time of 0
     simulator.setVehicleFactories(0);
   }
 
@@ -47,9 +27,6 @@ public class VisualTransitSimulatorTest {
   public void testStart() {
     List<Integer> vehicleStartTimings = Arrays.asList(1, 2);
     simulator.start(vehicleStartTimings, 10);
-    // timeSinceLastVehicle should be initialized to zeros
-    // Cannot directly access timeSinceLastVehicle since it's private
-    // But we can infer that start method works if update method functions as expected
     simulator.update();
     assertEquals(2, simulator.getActiveVehicles().size());
 
@@ -58,7 +35,7 @@ public class VisualTransitSimulatorTest {
   }
 
   @Test
-  public void testPause(){
+  public void testPause() {
     List<Integer> vehicleStartTimings = Arrays.asList(1, 2);
     simulator.start(vehicleStartTimings, 10);
     simulator.togglePause();
@@ -78,6 +55,93 @@ public class VisualTransitSimulatorTest {
     simulator.update();
     simulator.update();
     simulator.update();
-    assertEquals(6,simulator.getActiveVehicles().size());
+    assertEquals(6, simulator.getActiveVehicles().size());
   }
+
+  @Test
+  public void testConfigFileParsing() {
+    simulator.setLOGGING(true);
+
+    List<Line> lines = simulator.getLines();
+    assertNotNull(lines);
+    assertEquals(2, lines.size());
+
+
+    Line busLine = lines.get(0);
+    assertEquals("Campus Connector", busLine.getName());
+    assertEquals(Line.BUS_LINE, busLine.getType());
+  }
+
+  @Test
+  public void testUpdateWithLogging() {
+
+    simulator.setLOGGING(true);
+    List<Integer> vehicleStartTimings = Arrays.asList(1, 2);
+    simulator.start(vehicleStartTimings, 10);
+    simulator.update();
+    assertEquals(2, simulator.getActiveVehicles().size());
+    simulator.setLOGGING(false);
+    simulator.update();
+    assertEquals(3, simulator.getActiveVehicles().size());
+  }
+
+  @Test
+  public void testUpdateAfterSimulationEnds() {
+
+    simulator.start(List.of(2), 2);
+    simulator.setVehicleFactories(0);
+
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    assertEquals(3, simulator.getSimulationTimeElapsed());
+  }
+
+  @Test
+  public void testVehicleGeneration() {
+    simulator.start(List.of(1), 10);
+    simulator.setVehicleFactories(0);
+
+    simulator.update();
+    List<Vehicle> activeVehicles = simulator.getActiveVehicles();
+    assertFalse(activeVehicles.isEmpty());
+  }
+
+  @Test
+  public void testVehicleUpdateAndCompletion() {
+
+    simulator.start(List.of(1), 10);
+    simulator.setVehicleFactories(0);
+    simulator.update();
+    simulator.update();
+
+    List<Vehicle> activeVehicles = simulator.getActiveVehicles();
+    assertTrue(activeVehicles.stream().allMatch(vehicle -> !vehicle.isTripComplete()));
+  }
+
+  @Test
+  public void testGenerateBusWhenTimeIsZero() {
+    WebServerSession sessionMock = mock(WebServerSession.class);
+    VisualTransitSimulator simulator = new VisualTransitSimulator("src/main/resources/bus.txt", sessionMock);
+
+    simulator.start(List.of(0, 10), 10);
+    simulator.setVehicleFactories(0);
+
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    simulator.update();
+    List<Vehicle> activeVehicles = simulator.getActiveVehicles();
+    assertEquals(0, activeVehicles.size());
+  }
+
+
 }
