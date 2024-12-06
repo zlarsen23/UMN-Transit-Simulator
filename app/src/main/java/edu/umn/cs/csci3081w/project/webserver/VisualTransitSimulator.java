@@ -110,9 +110,6 @@ public class VisualTransitSimulator {
           }
           if (line.getType().equals(Line.TRAIN_LINE) || line.getType().equals(Line.BUS_LINE)) {
             if (generatedVehicle != null && !line.isIssueExist()) {
-              if(generatedVehicle instanceof SmallBus){
-                generatedVehicle = new SmallBusDecorator(generatedVehicle);
-              }
               activeVehicles.add(generatedVehicle);
             }
             timeSinceLastVehicle.set(i, vehicleStartTimings.get(i));
