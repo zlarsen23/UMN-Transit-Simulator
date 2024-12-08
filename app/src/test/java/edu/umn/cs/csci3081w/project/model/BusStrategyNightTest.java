@@ -48,7 +48,7 @@ public class BusStrategyNightTest {
   }
 
   /**
-   * Testing with negative number of large buses
+   * Testing with negative number of large buses.
    */
   @Test
   public void testNegativeLargeBusNumber() {
@@ -61,7 +61,7 @@ public class BusStrategyNightTest {
   }
 
   /**
-   * Testing with negative number of small buses
+   * Testing with negative number of small buses.
    */
   @Test
   public void testNegativeSmallBusNumber() {

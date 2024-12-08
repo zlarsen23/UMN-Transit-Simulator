@@ -1,18 +1,31 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import edu.umn.cs.csci3081w.project.model.*;
-import org.junit.jupiter.api.Test;
-
+import edu.umn.cs.csci3081w.project.model.DieselTrain;
+import edu.umn.cs.csci3081w.project.model.ElectricTrain;
+import edu.umn.cs.csci3081w.project.model.Issue;
+import edu.umn.cs.csci3081w.project.model.LargeBus;
+import edu.umn.cs.csci3081w.project.model.Line;
+import edu.umn.cs.csci3081w.project.model.PassengerGenerator;
+import edu.umn.cs.csci3081w.project.model.Position;
+import edu.umn.cs.csci3081w.project.model.RandomPassengerGenerator;
+import edu.umn.cs.csci3081w.project.model.Route;
+import edu.umn.cs.csci3081w.project.model.SmallBus;
+import edu.umn.cs.csci3081w.project.model.Stop;
+import edu.umn.cs.csci3081w.project.model.Vehicle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.*;
 public class GetVehicleCommandTest {
 
   @Test
@@ -57,13 +70,16 @@ public class GetVehicleCommandTest {
 
     // Create Passenger Generators and Routes
     PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound,
+        probabilities);
 
     Route inboundRoute = new Route(0, "InboundRoute", stopsInbound, distances, generatorInbound);
-    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route outboundRoute = new Route(1, "OutboundRoute",
+        stopsOutbound, distances, generatorOutbound);
 
     // Create Line
-    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE",
+        outboundRoute, inboundRoute, new Issue());
 
     // Create a SmallBus as the active vehicle
     SmallBus smallBus = new SmallBus(1, testLine, 30, 1.0);
@@ -95,8 +111,10 @@ public class GetVehicleCommandTest {
       assertEquals(1, vehicleJson.get("id").getAsInt());
       assertEquals(30, vehicleJson.get("capacity").getAsInt());
       assertEquals(SmallBus.SMALL_BUS_VEHICLE, vehicleJson.get("type").getAsString());
-      assertEquals(-93.243774, vehicleJson.getAsJsonObject("position").get("longitude").getAsDouble());
-      assertEquals(44.972392, vehicleJson.getAsJsonObject("position").get("latitude").getAsDouble());
+      assertEquals(-93.243774,
+          vehicleJson.getAsJsonObject("position").get("longitude").getAsDouble());
+      assertEquals(44.972392,
+          vehicleJson.getAsJsonObject("position").get("latitude").getAsDouble());
 
       return true;
     }));
@@ -128,14 +146,19 @@ public class GetVehicleCommandTest {
     probabilities.add(0.7);
 
     // Create Passenger Generators and Routes
-    PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound,
+        probabilities);
+    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound,
+        probabilities);
 
-    Route inboundRoute = new Route(0, "InboundRoute", stopsInbound, distances, generatorInbound);
-    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route inboundRoute = new Route(0, "InboundRoute", stopsInbound,
+        distances, generatorInbound);
+    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound,
+        distances, generatorOutbound);
 
     // Create Line
-    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE",
+        outboundRoute, inboundRoute, new Issue());
 
     // Create a SmallBus as the active vehicle
     LargeBus largeBus = new LargeBus(1, testLine, 30, 1.0);
@@ -167,8 +190,10 @@ public class GetVehicleCommandTest {
       assertEquals(1, vehicleJson.get("id").getAsInt());
       assertEquals(30, vehicleJson.get("capacity").getAsInt());
       assertEquals(LargeBus.LARGE_BUS_VEHICLE, vehicleJson.get("type").getAsString());
-      assertEquals(-93.243774, vehicleJson.getAsJsonObject("position").get("longitude").getAsDouble());
-      assertEquals(44.972392, vehicleJson.getAsJsonObject("position").get("latitude").getAsDouble());
+      assertEquals(-93.243774,
+          vehicleJson.getAsJsonObject("position").get("longitude").getAsDouble());
+      assertEquals(44.972392,
+          vehicleJson.getAsJsonObject("position").get("latitude").getAsDouble());
 
       return true;
     }));
@@ -200,17 +225,22 @@ public class GetVehicleCommandTest {
     probabilities.add(0.7);
 
     // Create Passenger Generators and Routes
-    PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound,
+        probabilities);
+    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound,
+        probabilities);
 
-    Route inboundRoute = new Route(0, "InboundRoute", stopsInbound, distances, generatorInbound);
-    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route inboundRoute = new Route(0, "InboundRoute", stopsInbound,
+        distances, generatorInbound);
+    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound,
+        distances, generatorOutbound);
 
     // Create Line
-    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE",
+        outboundRoute, inboundRoute, new Issue());
 
     // Create a SmallBus as the active vehicle
-    ElectricTrain electricTrain= new ElectricTrain(1, testLine, 30, 1.0);
+    ElectricTrain electricTrain = new ElectricTrain(1, testLine, 30, 1.0);
     electricTrain.setPosition(new Position(-93.243774, 44.972392));
 
     List<Vehicle> activeVehicles = new ArrayList<>();
@@ -239,8 +269,10 @@ public class GetVehicleCommandTest {
       assertEquals(1, vehicleJson.get("id").getAsInt());
       assertEquals(30, vehicleJson.get("capacity").getAsInt());
       assertEquals(ElectricTrain.ELECTRIC_TRAIN_VEHICLE, vehicleJson.get("type").getAsString());
-      assertEquals(-93.243774, vehicleJson.getAsJsonObject("position").get("longitude").getAsDouble());
-      assertEquals(44.972392, vehicleJson.getAsJsonObject("position").get("latitude").getAsDouble());
+      assertEquals(-93.243774,
+          vehicleJson.getAsJsonObject("position").get("longitude").getAsDouble());
+      assertEquals(44.972392,
+          vehicleJson.getAsJsonObject("position").get("latitude").getAsDouble());
 
       return true;
     }));
@@ -272,14 +304,18 @@ public class GetVehicleCommandTest {
     probabilities.add(0.7);
 
     // Create Passenger Generators and Routes
-    PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound,
+        probabilities);
+    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound,
+        probabilities);
 
     Route inboundRoute = new Route(0, "InboundRoute", stopsInbound, distances, generatorInbound);
-    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound,
+        distances, generatorOutbound);
 
     // Create Line
-    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE",
+        outboundRoute, inboundRoute, new Issue());
 
     // Create a SmallBus as the active vehicle
     DieselTrain dieselTrain = new DieselTrain(1, testLine, 30, 1.0);
@@ -311,8 +347,10 @@ public class GetVehicleCommandTest {
       assertEquals(1, vehicleJson.get("id").getAsInt());
       assertEquals(30, vehicleJson.get("capacity").getAsInt());
       assertEquals(DieselTrain.DIESEL_TRAIN_VEHICLE, vehicleJson.get("type").getAsString());
-      assertEquals(-93.243774, vehicleJson.getAsJsonObject("position").get("longitude").getAsDouble());
-      assertEquals(44.972392, vehicleJson.getAsJsonObject("position").get("latitude").getAsDouble());
+      assertEquals(-93.243774,
+          vehicleJson.getAsJsonObject("position").get("longitude").getAsDouble());
+      assertEquals(44.972392,
+          vehicleJson.getAsJsonObject("position").get("latitude").getAsDouble());
 
       return true;
     }));

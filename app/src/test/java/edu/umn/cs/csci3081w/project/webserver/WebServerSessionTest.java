@@ -1,32 +1,29 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.*;
 
 import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.PassengerFactory;
 import edu.umn.cs.csci3081w.project.model.RandomPassengerGenerator;
-import edu.umn.cs.csci3081w.project.model.Vehicle;
-
-import javax.websocket.RemoteEndpoint;
 import javax.websocket.Session;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import java.util.Map;
+
 
 public class WebServerSessionTest {
 
   private WebServerSession webServerSession;
   private Session mockSession;
+
   /**
    * Setup deterministic operations before each test runs.
    */

@@ -259,10 +259,10 @@ public class LineTest {
   public void testNullIssue() {
 
     testLine.setIssueNull();
-    assertEquals(false,testLine.isIssueExist());
+    assertEquals(false, testLine.isIssueExist());
 
     testLine.update();
-    assertEquals(false,testLine.isIssueExist());
+    assertEquals(false, testLine.isIssueExist());
   }
 
   /**

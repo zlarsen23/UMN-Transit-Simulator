@@ -109,5 +109,7 @@ public class Line {
     this.issue.createIssue();
   }
 
-  public void setIssueNull() {this.issue = null;}
+  public void setIssueNull() {
+    this.issue = null;
+  }
 }

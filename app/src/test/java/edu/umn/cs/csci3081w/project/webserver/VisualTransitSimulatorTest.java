@@ -1,12 +1,20 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 
-import edu.umn.cs.csci3081w.project.model.*;
+import edu.umn.cs.csci3081w.project.model.Line;
+import edu.umn.cs.csci3081w.project.model.StorageFacility;
+import edu.umn.cs.csci3081w.project.model.Vehicle;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.*;
+
+
 public class VisualTransitSimulatorTest {
 
   private VisualTransitSimulator simulator;
@@ -14,6 +22,9 @@ public class VisualTransitSimulatorTest {
   private List<Line> lines;
   private StorageFacility storageFacility;
 
+  /**
+   * Set up before each test.
+   */
   @BeforeEach
   public void setUp() {
     mockSession = mock(WebServerSession.class);
@@ -60,7 +71,7 @@ public class VisualTransitSimulatorTest {
 
   @Test
   public void testConfigFileParsing() {
-    simulator.setLOGGING(true);
+    simulator.setLogging(true);
 
     List<Line> lines = simulator.getLines();
     assertNotNull(lines);
@@ -75,12 +86,12 @@ public class VisualTransitSimulatorTest {
   @Test
   public void testUpdateWithLogging() {
 
-    simulator.setLOGGING(true);
+    simulator.setLogging(true);
     List<Integer> vehicleStartTimings = Arrays.asList(1, 2);
     simulator.start(vehicleStartTimings, 10);
     simulator.update();
     assertEquals(2, simulator.getActiveVehicles().size());
-    simulator.setLOGGING(false);
+    simulator.setLogging(false);
     simulator.update();
     assertEquals(3, simulator.getActiveVehicles().size());
   }
@@ -122,7 +133,8 @@ public class VisualTransitSimulatorTest {
   @Test
   public void testGenerateBusWhenTimeIsZero() {
     WebServerSession sessionMock = mock(WebServerSession.class);
-    VisualTransitSimulator simulator = new VisualTransitSimulator("src/main/resources/bus.txt", sessionMock);
+    VisualTransitSimulator simulator =
+        new VisualTransitSimulator("src/main/resources/bus.txt", sessionMock);
 
     simulator.start(List.of(0, 10), 10);
     simulator.setVehicleFactories(0);

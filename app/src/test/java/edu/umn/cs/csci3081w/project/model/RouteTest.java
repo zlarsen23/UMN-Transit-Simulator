@@ -260,8 +260,8 @@ public class RouteTest {
   }
 
   @Test
-  public void testGetLastStop(){
-    assertEquals("test stop",simpleTestRouteIn.prevStop().getName());
+  public void testGetLastStop() {
+    assertEquals("test stop", simpleTestRouteIn.prevStop().getName());
     simpleTestRouteIn.nextStop();
     assertEquals("test stop", simpleTestRouteIn.prevStop().getName());
   }

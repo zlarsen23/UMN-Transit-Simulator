@@ -1,8 +1,15 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
-import edu.umn.cs.csci3081w.project.model.*;
-
-import java.io.PrintStream;
+import edu.umn.cs.csci3081w.project.model.Bus;
+import edu.umn.cs.csci3081w.project.model.BusFactory;
+import edu.umn.cs.csci3081w.project.model.Counter;
+import edu.umn.cs.csci3081w.project.model.Line;
+import edu.umn.cs.csci3081w.project.model.StorageFacility;
+import edu.umn.cs.csci3081w.project.model.Train;
+import edu.umn.cs.csci3081w.project.model.TrainFactory;
+import edu.umn.cs.csci3081w.project.model.Vehicle;
+import edu.umn.cs.csci3081w.project.model.VehicleConcreteSubject;
+import edu.umn.cs.csci3081w.project.model.VehicleFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,7 +175,11 @@ public class VisualTransitSimulator {
     vehicleConcreteSubject.attachObserver(vehicle);
   }
 
-  public void setLOGGING(boolean bool){LOGGING=bool;}
+  public void setLogging(boolean bool) {
+    LOGGING = bool;
+  }
 
-  public int getSimulationTimeElapsed(){return simulationTimeElapsed;}
+  public int getSimulationTimeElapsed() {
+    return simulationTimeElapsed;
+  }
 }

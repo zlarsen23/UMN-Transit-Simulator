@@ -1,8 +1,6 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import com.google.gson.JsonObject;
-
-import java.awt.Color;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +52,6 @@ public abstract class Vehicle implements VehicleObserver {
   public abstract void report(PrintStream out);
 
   public abstract int getCurrentCO2Emission();
-
-  public abstract Color getColor();
 
   public int getId() {
     return id;
@@ -287,14 +283,14 @@ public abstract class Vehicle implements VehicleObserver {
     } else {
       data.addProperty("text", "");
     }
-      if(vehicleConcreteSubject != null){
-        vehicleConcreteSubject.getSession().sendJson(data);
-      }
-      return tripCompleted;
+    if (vehicleConcreteSubject != null) {
+      vehicleConcreteSubject.getSession().sendJson(data);
+    }
+    return tripCompleted;
   }
 
   //public JsonObject getTestOutput() {
-    //return testOutput;
+  //return testOutput;
   //}
 
   public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {

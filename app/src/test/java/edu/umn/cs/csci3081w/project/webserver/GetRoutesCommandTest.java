@@ -1,18 +1,19 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
-import com.google.gson.JsonArray;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.Line;
 import edu.umn.cs.csci3081w.project.model.Position;
 import edu.umn.cs.csci3081w.project.model.Route;
 import edu.umn.cs.csci3081w.project.model.Stop;
-import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.Collections;
+import org.junit.jupiter.api.Test;
 
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.*;
 
 public class GetRoutesCommandTest {
   @Test
@@ -49,21 +50,4 @@ public class GetRoutesCommandTest {
     ));
   }
 
-
-//  how do I test private methods?
-//  @Test
-//  void testGetRouteJsonObject() {
-//    VisualTransitSimulator simulator = mock(VisualTransitSimulator.class);
-//    Route route = mock(Route.class);
-//    Stop stop1 = mock(Stop.class);
-//    Position position1 = mock(Position.class);
-//    when(route.getStops()).thenReturn(Arrays.asList(stop1));
-//    when(stop1.getId()).thenReturn(1);
-//    when(stop1.getPosition()).thenReturn(position1);
-//    when(position1.getLongitude()).thenReturn(10.0);
-//    when(position1.getLatitude()).thenReturn(20.0);
-//
-//    GetRoutesCommand command = new GetRoutesCommand(simulator);
-//    JsonObject json = command.getRouteJsonObject(route);
-//  }
 }
