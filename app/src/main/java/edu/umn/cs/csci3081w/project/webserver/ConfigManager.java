@@ -16,6 +16,9 @@ import java.util.Scanner;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
+/**
+ * Used to read the config file.
+ */
 public class ConfigManager {
   private static final String LINE_START = "LINE_START";
   private static final String LINE_END = "LINE_END";
@@ -34,6 +37,9 @@ public class ConfigManager {
   private List<Route> routes = new ArrayList<Route>();
   private StorageFacility storageFacility;
 
+  /**
+   * Initialize the ConfigManager.
+   */
   public ConfigManager() {
     storageFacility = null;
   }
@@ -136,10 +142,18 @@ public class ConfigManager {
     }
   }
 
+  /**
+   * Get the lines read in the config file.
+   * @return List of Lines
+   */
   public List<Line> getLines() {
     return lines;
   }
 
+  /**
+   * Get the StorageFacility.
+   * @return storageFacility
+   */
   public StorageFacility getStorageFacility() {
     return storageFacility;
   }

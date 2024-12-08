@@ -1,5 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Factory to decide what type of Bus to use.
+ */
 public class BusFactory implements VehicleFactory {
   private GenerationStrategy generationStrategy;
   private Counter counter;

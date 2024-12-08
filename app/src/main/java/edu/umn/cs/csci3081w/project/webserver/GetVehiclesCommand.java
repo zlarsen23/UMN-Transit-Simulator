@@ -9,10 +9,17 @@ import edu.umn.cs.csci3081w.project.model.SmallBus;
 import edu.umn.cs.csci3081w.project.model.Vehicle;
 import java.util.List;
 
+/**
+ * Get Vehicle Info command.
+ */
 public class GetVehiclesCommand extends SimulatorCommand {
 
   private VisualTransitSimulator simulator;
 
+  /**
+   * Constructor for GetVehiclesCommand.
+   * @param simulator VTS
+   */
   public GetVehiclesCommand(VisualTransitSimulator simulator) {
     this.simulator = simulator;
   }

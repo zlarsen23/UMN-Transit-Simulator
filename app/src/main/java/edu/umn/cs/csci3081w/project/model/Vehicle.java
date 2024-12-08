@@ -49,8 +49,16 @@ public abstract class Vehicle implements VehicleObserver {
     carbonEmissionHistory = new ArrayList<Integer>();
   }
 
+  /**
+   * Print out the stats of the Vehicle.
+   * @param out PrintStream
+   */
   public abstract void report(PrintStream out);
 
+  /**
+   * Get the current cO2 emission.
+   * @return int co2
+   */
   public abstract int getCurrentCO2Emission();
 
   public int getId() {

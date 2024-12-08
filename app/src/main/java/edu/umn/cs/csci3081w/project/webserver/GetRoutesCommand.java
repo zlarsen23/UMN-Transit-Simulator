@@ -6,10 +6,17 @@ import edu.umn.cs.csci3081w.project.model.Line;
 import edu.umn.cs.csci3081w.project.model.Route;
 import java.util.List;
 
+/**
+ * Command for getting a Vehicle Route and displaying it.
+ */
 public class GetRoutesCommand extends SimulatorCommand {
 
   private VisualTransitSimulator simulator;
 
+  /**
+   * Constructor for GetRoutesCommand.
+   * @param simulator VTS
+   */
   public GetRoutesCommand(VisualTransitSimulator simulator) {
     this.simulator = simulator;
   }
