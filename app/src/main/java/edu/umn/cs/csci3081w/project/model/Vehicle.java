@@ -370,4 +370,6 @@ public abstract class Vehicle implements VehicleObserver {
   public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
     this.vehicleConcreteSubject = vehicleConcreteSubject;
   }
+
+  public abstract Color getColor();
 }
