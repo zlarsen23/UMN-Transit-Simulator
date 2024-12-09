@@ -9,7 +9,6 @@ import java.util.List;
 
 public abstract class VehicleDecorator extends Vehicle {
   protected Vehicle decoratedVehicle;
-  //protected Color color;
 
   public VehicleDecorator(Vehicle decoratedVehicle) {
     super(decoratedVehicle.getId(),decoratedVehicle.getLine(),decoratedVehicle.getCapacity(),

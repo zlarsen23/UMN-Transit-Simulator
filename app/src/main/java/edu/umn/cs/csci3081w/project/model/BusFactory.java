@@ -30,7 +30,6 @@ public class BusFactory implements VehicleFactory {
       generatedVehicle = new SmallBus(counter.getSmallBusIdCounterAndIncrement(),
           line, SmallBus.CAPACITY, SmallBus.SPEED);
       generatedVehicle = new SmallBusDecorator(generatedVehicle);
-      System.out.println(generatedVehicle.getColor());
       storageFacility.decrementSmallBusesNum();
     } else if (typeOfVehicle != null && typeOfVehicle.equals(LargeBus.LARGE_BUS_VEHICLE)) {
       generatedVehicle = new LargeBus(counter.getLargeBusIdCounterAndIncrement(), line,

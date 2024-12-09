@@ -50,7 +50,6 @@ public abstract class Vehicle implements VehicleObserver {
     setPosition(new Position(nextStop.getPosition().getLongitude(),
         nextStop.getPosition().getLatitude()));
     carbonEmissionHistory = new ArrayList<Integer>();
-    // set a default color white
   }
 
   public abstract void report(PrintStream out);
