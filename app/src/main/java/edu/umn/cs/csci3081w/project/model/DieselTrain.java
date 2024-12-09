@@ -3,9 +3,21 @@ package edu.umn.cs.csci3081w.project.model;
 import java.awt.*;
 import java.io.PrintStream;
 
+/**
+ * A type of Train that uses Diesel fuel.
+ */
 public class DieselTrain extends Train {
+  /**
+   * String describing the train.
+   */
   public static final String DIESEL_TRAIN_VEHICLE = "DIESEL_TRAIN_VEHICLE";
+  /**
+   * Speed for the train.
+   */
   public static final double SPEED = 1;
+  /**
+   * Capacity for the train.
+   */
   public static final int CAPACITY = 120;
 
   /**

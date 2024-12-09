@@ -1,6 +1,9 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -8,19 +11,15 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.google.gson.JsonObject;
+import edu.umn.cs.csci3081w.project.webserver.WebServerSession;
 import java.util.ArrayList;
 import java.util.List;
-
-import edu.umn.cs.csci3081w.project.webserver.WebServerSession;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import javax.websocket.Session;
-
-import org.junit.jupiter.api.TestTemplate;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.mockito.Mockito.*;
+
 
 public class VehicleTest {
 
@@ -240,7 +239,7 @@ public class VehicleTest {
   }
 
   @Test
-  public void testMoveWithNoPassengers(){
+  public void testMoveWithNoPassengers() {
     Passenger testPassenger = new Passenger(1, "testPassenger");
     testVehicle.loadPassenger(testPassenger);
     assertEquals("test stop 2", testVehicle.getNextStop().getName());
@@ -281,12 +280,15 @@ public class VehicleTest {
     probabilities.add(0.7);
 
     PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound,
+        probabilities);
 
     Route inboundRoute = new Route(0, "InboundRoute", stopsInbound, distances, generatorInbound);
-    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound,
+        distances, generatorOutbound);
 
-    Line testLine = new Line(1, "Test Line", "LARGE_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line testLine = new Line(1, "Test Line", "LARGE_BUS_LINE",
+        outboundRoute, inboundRoute, new Issue());
 
     LargeBus largeBus = new LargeBus(1, testLine, LargeBus.CAPACITY, LargeBus.SPEED);
     largeBus.setVehicleSubject(mockVehicleSubject);
@@ -336,13 +338,18 @@ public class VehicleTest {
     probabilities.add(0.3);
     probabilities.add(0.7);
 
-    PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound,
+        probabilities);
+    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound,
+        probabilities);
 
-    Route inboundRoute = new Route(0, "InboundRoute", stopsInbound, distances, generatorInbound);
-    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route inboundRoute = new Route(0, "InboundRoute",
+        stopsInbound, distances, generatorInbound);
+    Route outboundRoute = new Route(1, "OutboundRoute",
+        stopsOutbound, distances, generatorOutbound);
 
-    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line testLine = new Line(1, "Test Line", "SMALL_BUS_LINE",
+        outboundRoute, inboundRoute, new Issue());
 
     SmallBus smallBus = new SmallBus(1, testLine, LargeBus.CAPACITY, LargeBus.SPEED);
     smallBus.setVehicleSubject(mockVehicleSubject);
@@ -393,12 +400,15 @@ public class VehicleTest {
     probabilities.add(0.7);
 
     PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound,
+        probabilities);
 
     Route inboundRoute = new Route(0, "InboundRoute", stopsInbound, distances, generatorInbound);
-    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route outboundRoute = new Route(1, "OutboundRoute",
+        stopsOutbound, distances, generatorOutbound);
 
-    Line testLine = new Line(1, "Test Line", "ELECTRIC-TRAIN_LINE", outboundRoute, inboundRoute, new Issue());
+    Line testLine = new Line(1, "Test Line", "ELECTRIC-TRAIN_LINE",
+        outboundRoute, inboundRoute, new Issue());
 
     ElectricTrain electricTrain = new ElectricTrain(1, testLine, LargeBus.CAPACITY, LargeBus.SPEED);
     electricTrain.setVehicleSubject(mockVehicleSubject);
@@ -449,12 +459,15 @@ public class VehicleTest {
     probabilities.add(0.7);
 
     PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound,
+        probabilities);
 
     Route inboundRoute = new Route(0, "InboundRoute", stopsInbound, distances, generatorInbound);
-    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route outboundRoute = new Route(1, "OutboundRoute", stopsOutbound,
+        distances, generatorOutbound);
 
-    Line testLine = new Line(1, "Test Line", "LARGE_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line testLine = new Line(1, "Test Line", "LARGE_BUS_LINE",
+        outboundRoute, inboundRoute, new Issue());
 
     DieselTrain dieselTrain = new DieselTrain(1, testLine, LargeBus.CAPACITY, LargeBus.SPEED);
     dieselTrain.setVehicleSubject(mockVehicleSubject);

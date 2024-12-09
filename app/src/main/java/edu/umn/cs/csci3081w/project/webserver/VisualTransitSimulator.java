@@ -1,11 +1,21 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
-import edu.umn.cs.csci3081w.project.model.*;
-
-import java.io.PrintStream;
+import edu.umn.cs.csci3081w.project.model.Bus;
+import edu.umn.cs.csci3081w.project.model.BusFactory;
+import edu.umn.cs.csci3081w.project.model.Counter;
+import edu.umn.cs.csci3081w.project.model.Line;
+import edu.umn.cs.csci3081w.project.model.StorageFacility;
+import edu.umn.cs.csci3081w.project.model.Train;
+import edu.umn.cs.csci3081w.project.model.TrainFactory;
+import edu.umn.cs.csci3081w.project.model.Vehicle;
+import edu.umn.cs.csci3081w.project.model.VehicleConcreteSubject;
+import edu.umn.cs.csci3081w.project.model.VehicleFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * VisualTransitSimulator. starts and updates the simulation.
+ */
 public class VisualTransitSimulator {
 
   private static boolean LOGGING = false;
@@ -151,10 +161,16 @@ public class VisualTransitSimulator {
     }
   }
 
+  /**
+   * Returns list fo lines.
+   */
   public List<Line> getLines() {
     return lines;
   }
 
+  /**
+   * Returns list of active vehicles.
+   */
   public List<Vehicle> getActiveVehicles() {
     return activeVehicles;
   }
@@ -166,5 +182,21 @@ public class VisualTransitSimulator {
    */
   public void addObserver(Vehicle vehicle) {
     vehicleConcreteSubject.attachObserver(vehicle);
+  }
+
+  /**
+   * sets logging to true or false.
+   * @param bool boolean
+   */
+  public void setLogging(boolean bool) {
+    LOGGING = bool;
+  }
+
+  /**
+   * returns time elapsed simulation.
+   * @return simulationTimeElapsed as int.
+   */
+  public int getSimulationTimeElapsed() {
+    return simulationTimeElapsed;
   }
 }

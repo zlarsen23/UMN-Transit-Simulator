@@ -1,11 +1,14 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import com.google.gson.JsonObject;
-
 import java.awt.Color;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Vehicle is the parent class of two types: Bus and Train.
+ */
 
 public abstract class Vehicle implements VehicleObserver {
 
@@ -52,48 +55,94 @@ public abstract class Vehicle implements VehicleObserver {
     carbonEmissionHistory = new ArrayList<Integer>();
   }
 
+  /**
+   * Print out the stats of the Vehicle.
+   * @param out PrintStream
+   */
   public abstract void report(PrintStream out);
 
+  /**
+   * Get the current cO2 emission.
+   * @return int co2
+   */
   public abstract int getCurrentCO2Emission();
 
-  public abstract Color getColor();
-
+  /**
+   * returns Vehicle Id.
+   * @return id as int.
+   */
   public int getId() {
     return id;
   }
 
+  /**
+   * returns Vehicle capacity.
+   * @return capacity as int.
+   */
   public int getCapacity() {
     return capacity;
   }
 
+  /**
+   * returns the Vehicle speed.
+   * @return speed as double
+   */
   public double getSpeed() {
     return speed;
   }
 
+  /**
+   * returns Vehicle Passenger loader.
+   * @return loader as PassengerLoader.
+   */
   public PassengerLoader getPassengerLoader() {
     return loader;
   }
 
+  /**
+   * returns Vehicle Passenger unloader.
+   * @return unloader as PassengerUnloader.
+   */
   public PassengerUnloader getPassengerUnloader() {
     return unloader;
   }
 
+  /**
+   * returns passenger of Vehicle.
+   * @return passenger as List.
+   */
   public List<Passenger> getPassengers() {
     return passengers;
   }
 
+  /**
+   * returns name of Vehicle.
+   * @return name as String.
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * sets the name of the Vehicle.
+   * @param name name of Vehicle.
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * returns position of Vehicle.
+   * @return position as Position.
+   */
   public Position getPosition() {
     return position;
   }
 
+  /**
+   * sets position of Vehicle.
+   * @param position position of vehicle.
+   */
   public void setPosition(Position position) {
     this.position = position;
   }
@@ -169,10 +218,18 @@ public abstract class Vehicle implements VehicleObserver {
     carbonEmissionHistory.add(0, getCurrentCO2Emission());
   }
 
+  /**
+   * unload passengers at next stop.
+   * @return number of passengers to unload.
+   */
   private int unloadPassengers() {
     return getPassengerUnloader().unloadPassengers(getPassengers(), nextStop);
   }
 
+  /**
+   * handles arrival at vehicle stop.
+   * @return number of passengers handled.
+   */
   private int handleStop() {
     // This function handles arrival at a bus stop
     int passengersHandled = 0;
@@ -222,6 +279,10 @@ public abstract class Vehicle implements VehicleObserver {
     return getSpeed();
   }
 
+  /**
+   * figure out is the current route is an Inbound or Outbound Route.
+   * @return Route.
+   */
   private Route currentRoute() {
     // Figure out if we're on the outgoing or incoming route
     if (!line.getOutboundRoute().isAtEnd()) {
@@ -230,10 +291,18 @@ public abstract class Vehicle implements VehicleObserver {
     return line.getInboundRoute();
   }
 
+  /**
+   * returns next stop of Vehicle.
+   * @return nextStop as Stop.
+   */
   public Stop getNextStop() {
     return nextStop;
   }
 
+  /**
+   * returns line of Vehicle.
+   * @return line as Line.
+   */
   public Line getLine() {
     return line;
   }
@@ -294,6 +363,10 @@ public abstract class Vehicle implements VehicleObserver {
       return tripCompleted;
   }
 
+  /**
+   * sets vehicle subject.
+   * @param vehicleConcreteSubject vehicle concrete subject.
+   */
   public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
     this.vehicleConcreteSubject = vehicleConcreteSubject;
   }

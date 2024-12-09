@@ -3,9 +3,21 @@ package edu.umn.cs.csci3081w.project.model;
 import java.awt.*;
 import java.io.PrintStream;
 
+/**
+ * Type of train that's electric.
+ */
 public class ElectricTrain extends Train {
+  /**
+   * String describing the train.
+   */
   public static final String ELECTRIC_TRAIN_VEHICLE = "ELECTRIC_TRAIN_VEHICLE";
+  /**
+   * Speed of the train.
+   */
   public static final double SPEED = 1;
+  /**
+   * Capacity of the train.
+   */
   public static final int CAPACITY = 120;
 
   /**

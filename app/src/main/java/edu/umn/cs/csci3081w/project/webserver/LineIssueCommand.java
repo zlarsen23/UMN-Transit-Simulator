@@ -4,10 +4,17 @@ import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.Line;
 import java.util.List;
 
-public class LineIssueCommand extends SimulatorCommand {
 
+/**
+ * LineIssueCommand extends SimulatorCommand.
+ */
+public class LineIssueCommand extends SimulatorCommand {
   private VisualTransitSimulator simulator;
 
+  /**
+   * constructor for LinesIssueCommand.
+   * @param simulator visSim of type VisualTransitSimulator.
+   */
   public LineIssueCommand(VisualTransitSimulator simulator) {
     this.simulator = simulator;
   }

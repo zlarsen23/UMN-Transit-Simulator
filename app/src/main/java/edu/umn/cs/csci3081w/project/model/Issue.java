@@ -1,5 +1,9 @@
 package edu.umn.cs.csci3081w.project.model;
 
+
+/**
+ * Class for vehicle issues.
+ */
 public class Issue {
   private int counter;
 
@@ -10,6 +14,11 @@ public class Issue {
     this.counter = 0;
   }
 
+  /**
+   * Returns counter.
+   *
+   * @return counter
+   */
   public int getCounter() {
     return counter;
   }

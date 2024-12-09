@@ -1,7 +1,9 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,7 +50,7 @@ public class BusStrategyDayTest {
 
 
   /**
-   * Testing with negative number of small buses
+   * Testing with negative number of small buses.
    */
   @Test
   public void testNegativeSmallBusNumber() {
@@ -59,18 +61,8 @@ public class BusStrategyDayTest {
     assertEquals(busStrategyDay.getTypeOfVehicle(storageFacility), null);
   }
 
-//  /**
-//   * Testing with negative number of small buses
-//   */
-//  @Test
-//  public void testNegativeLargeBusNumber() {
-//    StorageFacility storageFacility = new StorageFacility(0, -1, 0, 0);
-//    BusStrategyDay busStrategyDay = new BusStrategyDay();
-//    assertEquals(busStrategyDay.getTypeOfVehicle(storageFacility), null);
-//  }
-
   /**
-   * Testing with negative number of large buses
+   * Testing with negative number of large buses.
    */
   @Test
   public void testNegativeLargeBusNumber() {

@@ -48,7 +48,7 @@ public class TrainStrategyDayTest {
   }
 
   /**
-   * Testing with negative number of diesel trains
+   * Testing with negative number of diesel trains.
    */
   @Test
   public void testNegativeDieselTrainsNum() {
@@ -61,7 +61,7 @@ public class TrainStrategyDayTest {
   }
 
   /**
-   * Testing with negative number of electric trains
+   * Testing with negative number of electric trains.
    */
   @Test
   public void testNegativeElectricTrainsNum() {

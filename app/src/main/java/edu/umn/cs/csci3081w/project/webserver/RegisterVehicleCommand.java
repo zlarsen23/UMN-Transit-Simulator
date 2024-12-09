@@ -4,10 +4,16 @@ import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.Vehicle;
 import java.util.List;
 
+/**
+ * RegisterVehicleCommand extends SimulatorCommand.
+ */
 public class RegisterVehicleCommand extends SimulatorCommand {
-
   private VisualTransitSimulator simulator;
 
+  /**
+   * constructor RegisterVehicleCommand.
+   * @param simulator simulator of type VisualTransitSimulator.
+   */
   public RegisterVehicleCommand(VisualTransitSimulator simulator) {
     this.simulator = simulator;
   }

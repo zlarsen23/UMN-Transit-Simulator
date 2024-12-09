@@ -1,8 +1,14 @@
 package edu.umn.cs.csci3081w.project.model;
 
+/**
+ * Strategy for Buses during the Night.
+ */
 public class BusStrategyNight implements GenerationStrategy {
   private int counter;
 
+  /**
+   * Initialize a Counter for Bus Strategy Night.
+   */
   public BusStrategyNight() {
     this.counter = 0;
   }
@@ -27,6 +33,10 @@ public class BusStrategyNight implements GenerationStrategy {
     return typeOfVehicle;
   }
 
+  /**
+   * Return the counter.
+   * @return int counter
+   */
   public int getCounter() {
     return counter;
   }
