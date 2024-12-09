@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * StartCommand extends SimulatorCommand.
+ */
 public class StartCommand extends SimulatorCommand {
 
   private VisualTransitSimulator simulator;
@@ -42,7 +45,9 @@ public class StartCommand extends SimulatorCommand {
     simulator.setVehicleFactories(getCurrentSimulationTime());
     simulator.start(timeBetweenVehicles, numTimeSteps);
   }
-
+  /**
+   * Returns current time.
+   */
   public int getCurrentSimulationTime() {
     return LocalDateTime.now().getHour();
   }

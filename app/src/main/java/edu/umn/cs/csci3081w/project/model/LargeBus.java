@@ -2,6 +2,9 @@ package edu.umn.cs.csci3081w.project.model;
 
 import java.io.PrintStream;
 
+/**
+ * LargeBus extends Bus.
+ */
 public class LargeBus extends Bus {
   public static final String LARGE_BUS_VEHICLE = "LARGE_BUS_VEHICLE";
   public static final double SPEED = 0.5;

@@ -13,6 +13,9 @@ import edu.umn.cs.csci3081w.project.model.VehicleFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * VisualTransitSimulator. starts and updates the simulation.
+ */
 public class VisualTransitSimulator {
 
   private static boolean LOGGING = false;
@@ -158,10 +161,16 @@ public class VisualTransitSimulator {
     }
   }
 
+  /**
+   * Returns list fo lines.
+   */
   public List<Line> getLines() {
     return lines;
   }
 
+  /**
+   * Returns list of active vehicles.
+   */
   public List<Vehicle> getActiveVehicles() {
     return activeVehicles;
   }
@@ -175,10 +184,18 @@ public class VisualTransitSimulator {
     vehicleConcreteSubject.attachObserver(vehicle);
   }
 
+  /**
+   * sets logging to true or false.
+   * @param bool boolean
+   */
   public void setLogging(boolean bool) {
     LOGGING = bool;
   }
 
+  /**
+   * returns time elapsed simulation.
+   * @return simulationTimeElapsed as int.
+   */
   public int getSimulationTimeElapsed() {
     return simulationTimeElapsed;
   }
