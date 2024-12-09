@@ -1,5 +1,6 @@
 package edu.umn.cs.csci3081w.project.model;
 
+import java.awt.*;
 import java.io.PrintStream;
 
 /**
@@ -60,5 +61,10 @@ public class DieselTrain extends Train {
    */
   public int getCurrentCO2Emission() {
     return ((3 * getPassengers().size()) + 6);
+  }
+
+  @Override
+  public Color getColor() {
+    return color;
   }
 }

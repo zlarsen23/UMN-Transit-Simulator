@@ -1,6 +1,7 @@
 package edu.umn.cs.csci3081w.project.model;
 
 import com.google.gson.JsonObject;
+import java.awt.Color;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public abstract class Vehicle implements VehicleObserver {
   private Stop nextStop;
   private List<Integer> carbonEmissionHistory;
   private VehicleConcreteSubject vehicleConcreteSubject;
+  protected Color color;
 
   /**
    * Constructor for a vehicle.
@@ -67,7 +69,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns Vehicle Id.
-   * @return Id as int.
+   * @return id as int.
    */
   public int getId() {
     return id;
@@ -355,10 +357,10 @@ public abstract class Vehicle implements VehicleObserver {
     } else {
       data.addProperty("text", "");
     }
-    if (vehicleConcreteSubject != null) {
-      vehicleConcreteSubject.getSession().sendJson(data);
-    }
-    return tripCompleted;
+      if(vehicleConcreteSubject != null){
+        vehicleConcreteSubject.getSession().sendJson(data);
+      }
+      return tripCompleted;
   }
 
   /**
@@ -368,4 +370,6 @@ public abstract class Vehicle implements VehicleObserver {
   public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
     this.vehicleConcreteSubject = vehicleConcreteSubject;
   }
+
+  public abstract Color getColor();
 }
