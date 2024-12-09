@@ -23,6 +23,7 @@ public abstract class Vehicle implements VehicleObserver {
   private Stop nextStop;
   private List<Integer> carbonEmissionHistory;
   private VehicleConcreteSubject vehicleConcreteSubject;
+  protected Color color;
 
   /**
    * Constructor for a vehicle.
@@ -49,6 +50,7 @@ public abstract class Vehicle implements VehicleObserver {
     setPosition(new Position(nextStop.getPosition().getLongitude(),
         nextStop.getPosition().getLatitude()));
     carbonEmissionHistory = new ArrayList<Integer>();
+    // set a default color white
   }
 
   public abstract void report(PrintStream out);
@@ -292,10 +294,6 @@ public abstract class Vehicle implements VehicleObserver {
       }
       return tripCompleted;
   }
-
-  //public JsonObject getTestOutput() {
-    //return testOutput;
-  //}
 
   public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
     this.vehicleConcreteSubject = vehicleConcreteSubject;

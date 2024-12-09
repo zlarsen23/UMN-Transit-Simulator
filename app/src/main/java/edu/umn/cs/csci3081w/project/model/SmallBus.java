@@ -1,5 +1,6 @@
 package edu.umn.cs.csci3081w.project.model;
 
+import java.awt.*;
 import java.io.PrintStream;
 
 public class SmallBus extends Bus {
@@ -50,5 +51,10 @@ public class SmallBus extends Bus {
   @Override
   public int getCurrentCO2Emission() {
     return ((2 * getPassengers().size()) + 3);
+  }
+
+  @Override
+  public Color getColor() {
+    return color;
   }
 }
