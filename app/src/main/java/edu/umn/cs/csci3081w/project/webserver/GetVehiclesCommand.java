@@ -2,8 +2,15 @@ package edu.umn.cs.csci3081w.project.webserver;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import edu.umn.cs.csci3081w.project.model.*;
-
+import edu.umn.cs.csci3081w.project.model.DieselTrain;
+import edu.umn.cs.csci3081w.project.model.DieselTrainDecorator;
+import edu.umn.cs.csci3081w.project.model.ElectricTrain;
+import edu.umn.cs.csci3081w.project.model.ElectricTrainDecorator;
+import edu.umn.cs.csci3081w.project.model.LargeBus;
+import edu.umn.cs.csci3081w.project.model.LargeBusDecorator;
+import edu.umn.cs.csci3081w.project.model.SmallBus;
+import edu.umn.cs.csci3081w.project.model.SmallBusDecorator;
+import edu.umn.cs.csci3081w.project.model.Vehicle;
 import java.util.List;
 
 /**
@@ -15,6 +22,7 @@ public class GetVehiclesCommand extends SimulatorCommand {
 
   /**
    * Constructor for GetVehiclesCommand.
+   *
    * @param simulator VTS
    */
   public GetVehiclesCommand(VisualTransitSimulator simulator) {
@@ -60,9 +68,9 @@ public class GetVehiclesCommand extends SimulatorCommand {
       colorJsonObject.addProperty("g", currVehicle.getColor().getGreen());
       colorJsonObject.addProperty("b", currVehicle.getColor().getBlue());
 
-      if (currVehicle.getLine().isIssueExist()){
+      if (currVehicle.getLine().isIssueExist()) {
         colorJsonObject.addProperty("alpha", 155);
-      } else{
+      } else {
         colorJsonObject.addProperty("alpha", 255);
       }
 

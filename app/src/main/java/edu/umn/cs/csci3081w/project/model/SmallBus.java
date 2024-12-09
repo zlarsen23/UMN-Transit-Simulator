@@ -1,6 +1,6 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.PrintStream;
 
 public class SmallBus extends Bus {

@@ -45,6 +45,7 @@ public class StartCommand extends SimulatorCommand {
     simulator.setVehicleFactories(getCurrentSimulationTime());
     simulator.start(timeBetweenVehicles, numTimeSteps);
   }
+
   /**
    * Returns current time.
    */

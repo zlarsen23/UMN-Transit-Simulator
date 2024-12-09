@@ -57,18 +57,21 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * Print out the stats of the Vehicle.
+   *
    * @param out PrintStream
    */
   public abstract void report(PrintStream out);
 
   /**
    * Get the current cO2 emission.
+   *
    * @return int co2
    */
   public abstract int getCurrentCO2Emission();
 
   /**
    * returns Vehicle Id.
+   *
    * @return id as int.
    */
   public int getId() {
@@ -77,6 +80,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns Vehicle capacity.
+   *
    * @return capacity as int.
    */
   public int getCapacity() {
@@ -85,6 +89,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns the Vehicle speed.
+   *
    * @return speed as double
    */
   public double getSpeed() {
@@ -93,6 +98,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns Vehicle Passenger loader.
+   *
    * @return loader as PassengerLoader.
    */
   public PassengerLoader getPassengerLoader() {
@@ -101,6 +107,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns Vehicle Passenger unloader.
+   *
    * @return unloader as PassengerUnloader.
    */
   public PassengerUnloader getPassengerUnloader() {
@@ -109,6 +116,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns passenger of Vehicle.
+   *
    * @return passenger as List.
    */
   public List<Passenger> getPassengers() {
@@ -117,6 +125,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns name of Vehicle.
+   *
    * @return name as String.
    */
   public String getName() {
@@ -125,6 +134,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * sets the name of the Vehicle.
+   *
    * @param name name of Vehicle.
    */
   public void setName(String name) {
@@ -133,6 +143,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns position of Vehicle.
+   *
    * @return position as Position.
    */
   public Position getPosition() {
@@ -141,6 +152,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * sets position of Vehicle.
+   *
    * @param position position of vehicle.
    */
   public void setPosition(Position position) {
@@ -220,6 +232,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * unload passengers at next stop.
+   *
    * @return number of passengers to unload.
    */
   private int unloadPassengers() {
@@ -228,6 +241,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * handles arrival at vehicle stop.
+   *
    * @return number of passengers handled.
    */
   private int handleStop() {
@@ -281,6 +295,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * figure out is the current route is an Inbound or Outbound Route.
+   *
    * @return Route.
    */
   private Route currentRoute() {
@@ -293,6 +308,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns next stop of Vehicle.
+   *
    * @return nextStop as Stop.
    */
   public Stop getNextStop() {
@@ -301,6 +317,7 @@ public abstract class Vehicle implements VehicleObserver {
 
   /**
    * returns line of Vehicle.
+   *
    * @return line as Line.
    */
   public Line getLine() {
@@ -357,14 +374,15 @@ public abstract class Vehicle implements VehicleObserver {
     } else {
       data.addProperty("text", "");
     }
-      if(vehicleConcreteSubject != null){
-        vehicleConcreteSubject.getSession().sendJson(data);
-      }
-      return tripCompleted;
+    if (vehicleConcreteSubject != null) {
+      vehicleConcreteSubject.getSession().sendJson(data);
+    }
+    return tripCompleted;
   }
 
   /**
    * sets vehicle subject.
+   *
    * @param vehicleConcreteSubject vehicle concrete subject.
    */
   public void setVehicleSubject(VehicleConcreteSubject vehicleConcreteSubject) {
