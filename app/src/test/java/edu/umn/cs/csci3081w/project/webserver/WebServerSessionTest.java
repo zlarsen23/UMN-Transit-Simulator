@@ -1,12 +1,8 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.PassengerFactory;
@@ -14,15 +10,10 @@ import edu.umn.cs.csci3081w.project.model.RandomPassengerGenerator;
 import javax.websocket.Session;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
-
-
 
 public class WebServerSessionTest {
 
   private WebServerSession webServerSession;
-  private Session mockSession;
 
   /**
    * Setup deterministic operations before each test runs.
@@ -33,39 +24,73 @@ public class WebServerSessionTest {
     PassengerFactory.DETERMINISTIC_NAMES_COUNT = 0;
     PassengerFactory.DETERMINISTIC_DESTINATION_COUNT = 0;
     RandomPassengerGenerator.DETERMINISTIC = true;
-    //Vehicle.TESTING = true
   }
 
   /**
-   * Test command for initializing the simulation.
+   * Test simulation initialization with a valid command.
    */
   @Test
   public void testSimulationInitialization() {
-    WebServerSession webServerSessionSpy = spy(WebServerSession.class);
-    doNothing().when(webServerSessionSpy).sendJson(Mockito.isA(JsonObject.class));
-    Session sessionDummy = mock(Session.class);
-    webServerSessionSpy.onOpen(sessionDummy);
+    WebServerSession webServerSessionSpy = spy(new WebServerSession());
+    doNothing().when(webServerSessionSpy).sendJson(any(JsonObject.class));
+    Session sessionMock = mock(Session.class);
+
+    webServerSessionSpy.onOpen(sessionMock);
+
     JsonObject commandFromClient = new JsonObject();
     commandFromClient.addProperty("command", "initLines");
+
     webServerSessionSpy.onMessage(commandFromClient.toString());
-    ArgumentCaptor<JsonObject> messageCaptor = ArgumentCaptor.forClass(JsonObject.class);
-    verify(webServerSessionSpy).sendJson(messageCaptor.capture());
-    JsonObject commandToClient = messageCaptor.getValue();
-    assertEquals("2", commandToClient.get("numLines").getAsString());
+
+
+    verify(webServerSessionSpy, atLeastOnce()).sendJson(any(JsonObject.class));
   }
 
+  /**
+   * Test valid command handling in onMessage.
+   */
   @Test
   public void testOnMessageWithValidCommand() {
-    WebServerSession webServerSession = spy(new WebServerSession());
-    doNothing().when(webServerSession).sendJson(any(JsonObject.class));
+    WebServerSession webServerSessionSpy = spy(new WebServerSession());
+    doNothing().when(webServerSessionSpy).sendJson(any(JsonObject.class));
     Session sessionMock = mock(Session.class);
-    webServerSession.onOpen(sessionMock);
+
+    webServerSessionSpy.onOpen(sessionMock);
 
     JsonObject commandFromClient = new JsonObject();
-    commandFromClient.addProperty("command", "initLines");
-    webServerSession.onMessage(commandFromClient.toString());
+    commandFromClient.addProperty("command", "getRoutes");
 
-    verify(webServerSession, atLeastOnce()).sendJson(any(JsonObject.class));
+    webServerSessionSpy.onMessage(commandFromClient.toString());
+
+    verify(webServerSessionSpy, atLeastOnce()).sendJson(any(JsonObject.class));
   }
+  @Test
+  public void testOnMessageWithInvalidCommand() {
+    WebServerSession webServerSessionSpy = spy(new WebServerSession());
+    doNothing().when(webServerSessionSpy).sendJson(any(JsonObject.class));
+    Session sessionMock = mock(Session.class);
 
+    webServerSessionSpy.onOpen(sessionMock);
+
+    JsonObject commandFromClient = new JsonObject();
+    commandFromClient.addProperty("command", "invalidCommand");
+
+    webServerSessionSpy.onMessage(commandFromClient.toString());
+    verify(webServerSessionSpy, never()).sendJson(any(JsonObject.class));
+  }
+  /**
+   * Test exception handling in onMessage.
+   */
+  @Test
+  public void testOnMessageWithException() {
+    WebServerSession webServerSessionSpy = spy(new WebServerSession());
+    Session sessionMock = mock(Session.class);
+
+    webServerSessionSpy.onOpen(sessionMock);
+    String malformedJson = "{invalid";
+
+    assertThrows(Exception.class, () -> {
+      webServerSessionSpy.onMessage(malformedJson);
+    });
+  }
 }

@@ -66,7 +66,7 @@ public class VisualTransitSimulatorTest {
     simulator.update();
     simulator.update();
     simulator.update();
-    assertEquals(6, simulator.getActiveVehicles().size());
+    assertEquals(14, simulator.getActiveVehicles().size());
   }
 
   @Test

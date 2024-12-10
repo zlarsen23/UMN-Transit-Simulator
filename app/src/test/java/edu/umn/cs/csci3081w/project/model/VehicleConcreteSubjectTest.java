@@ -133,4 +133,24 @@ public class VehicleConcreteSubjectTest {
     assertEquals(expectedText, observedText);
   }
 
+  @Test
+  public void testNotifyObserversTripNotComplete() {
+    WebServerSession mockSession = mock(WebServerSession.class);
+    VehicleConcreteSubject subject = new VehicleConcreteSubject(mockSession);
+
+
+    VehicleObserver mockObserver = mock(VehicleObserver.class);
+
+    when(mockObserver.provideInfo()).thenReturn(true);
+
+    subject.attachObserver(mockObserver);
+
+    assertEquals(1, subject.getObservers().size(), "Observer should be added.");
+
+    subject.notifyObservers();
+
+
+    assertEquals(0, subject.getObservers().size(), "Observer should be removed after trip completion.");
+  }
+
 }

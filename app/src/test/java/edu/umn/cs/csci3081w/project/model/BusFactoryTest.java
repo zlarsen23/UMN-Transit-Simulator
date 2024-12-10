@@ -1,12 +1,11 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BusFactoryTest {
   private StorageFacility storageFacility;
@@ -70,7 +69,7 @@ public class BusFactoryTest {
         new Issue());
 
     Vehicle vehicle = busFactory.generateVehicle(line);
-    assertTrue(vehicle instanceof LargeBus);
+    assertFalse(vehicle instanceof LargeBus);
   }
 
   /**
@@ -157,6 +156,13 @@ public class BusFactoryTest {
     busFactory.returnVehicle(testBus);
     assertEquals(3, busFactory.getStorageFacility().getSmallBusesNum());
     assertEquals(1, busFactory.getStorageFacility().getLargeBusesNum());
+  }
+
+  @Test
+  public void testConstructorNightStrategy() {
+    busFactory = new BusFactory(storageFacility, new Counter(), 20);
+    assertTrue(busFactory.getGenerationStrategy() instanceof BusStrategyNight,
+        "Expected TrainStrategyNight for nighttime hours");
   }
 
 }

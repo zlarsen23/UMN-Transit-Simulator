@@ -1,10 +1,10 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PassengerFactoryTest {
 
@@ -35,6 +35,22 @@ public class PassengerFactoryTest {
   public void nameGeneration() {
     assertEquals("Goldy", PassengerFactory.nameGeneration());
 
+  }
+
+  @Test
+  void testNonDeterministicNameGeneration() {
+    PassengerFactory.DETERMINISTIC = false;
+
+    String name1 = PassengerFactory.nameGeneration();
+    String name2 = PassengerFactory.nameGeneration();
+
+    assertNotNull(name1);
+    assertNotNull(name2);
+    assertNotEquals("", name1);
+    assertNotEquals("", name2);
+
+    assertTrue(Character.isUpperCase(name1.charAt(0)));
+    assertTrue(Character.isUpperCase(name2.charAt(0)));
   }
 
 }

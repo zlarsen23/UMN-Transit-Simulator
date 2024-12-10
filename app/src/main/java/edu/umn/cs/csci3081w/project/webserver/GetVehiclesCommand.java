@@ -43,6 +43,8 @@ public class GetVehiclesCommand extends SimulatorCommand {
     JsonArray vehiclesArray = new JsonArray();
     for (int i = 0; i < vehicles.size(); i++) {
       Vehicle currVehicle = vehicles.get(i);
+
+
       JsonObject s = new JsonObject();
       s.addProperty("id", currVehicle.getId());
       s.addProperty("numPassengers", currVehicle.getPassengers().size());

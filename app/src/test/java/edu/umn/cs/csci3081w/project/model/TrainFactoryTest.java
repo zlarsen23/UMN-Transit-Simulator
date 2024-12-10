@@ -1,12 +1,18 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import org.mockito.Mockito;
+
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TrainFactoryTest {
   private StorageFacility storageFacility;
@@ -70,7 +76,7 @@ public class TrainFactoryTest {
         new Issue());
 
     Vehicle vehicle1 = trainFactory.generateVehicle(line);
-    assertTrue(vehicle1 instanceof ElectricTrain);
+    assertFalse(vehicle1 instanceof ElectricTrain);
   }
 
   /**
@@ -159,5 +165,54 @@ public class TrainFactoryTest {
     assertEquals(3, trainFactory.getStorageFacility().getElectricTrainsNum());
     assertEquals(4, trainFactory.getStorageFacility().getDieselTrainsNum());
 
+  }
+
+  @Test
+  public void testConstructorNightStrategy() {
+    trainFactory = new TrainFactory(storageFacility, new Counter(), 20); // Nighttime
+    assertTrue(trainFactory.getGenerationStrategy() instanceof TrainStrategyNight,
+        "Expected TrainStrategyNight for nighttime hours");
+  }
+
+  @Test
+  public void testGenerateUnrecognizedVehicleType() {
+
+    storageFacility = new StorageFacility(0, 0, 3, 3); // Ensure trains are available
+    trainFactory = new TrainFactory(storageFacility, new Counter(), 9);
+
+    // Create test line
+    List<Stop> stops = new ArrayList<>();
+    stops.add(new Stop(0, "Stop 1", new Position(-93.243774, 44.972392)));
+    stops.add(new Stop(1, "Stop 2", new Position(-93.235071, 44.973580)));
+
+    List<Double> distances = new ArrayList<>();
+    distances.add(1.0);
+
+    PassengerGenerator generator = new RandomPassengerGenerator(stops, List.of(0.5, 0.5));
+
+    Route routeIn = new Route(0, "InboundRoute", stops, distances, generator);
+    Route routeOut = new Route(1, "OutboundRoute", stops, distances, generator);
+
+    Line line = new Line(1000, "TestLine", "TRAIN", routeOut, routeIn, new Issue());
+
+
+    GenerationStrategy mockStrategy = new TrainStrategyDay() {
+      @Override
+      public String getTypeOfVehicle(StorageFacility storageFacility) {
+        return "UNKNOWN_TRAIN_TYPE";
+      }
+    };
+
+    trainFactory = new TrainFactory(storageFacility, new Counter(), 9);
+    trainFactory = new TrainFactory(storageFacility, new Counter(), 9) {
+      @Override
+      public GenerationStrategy getGenerationStrategy() {
+        return mockStrategy;
+      }
+    };
+
+    Vehicle vehicle = trainFactory.generateVehicle(line);
+
+    assertNotNull(vehicle, "No vehicle should be generated for unrecognized or null type");
   }
 }

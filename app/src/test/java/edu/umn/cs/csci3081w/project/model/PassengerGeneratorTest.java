@@ -63,5 +63,25 @@ public class PassengerGeneratorTest {
     testPassengerGeneratorTestImpl = null;
   }
 
+  @Test
+  public void testGeneratePassengersNonDeterministic() {
+    RandomPassengerGenerator.DETERMINISTIC = false;
+
+    List<Stop> stops = new ArrayList<>();
+    stops.add(new Stop(0, "Stop 1", new Position(0, 0)));
+    stops.add(new Stop(1, "Stop 2", new Position(1, 1)));
+
+    List<Double> probabilities = new ArrayList<>();
+    probabilities.add(0.5);
+    probabilities.add(0.9);
+
+    RandomPassengerGenerator generator = new RandomPassengerGenerator(stops, probabilities);
+
+    int passengersAdded = generator.generatePassengers();
+
+    assertEquals(true, passengersAdded >= 0 && passengersAdded <= stops.size());
+  }
+
+
 
 }

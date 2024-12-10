@@ -18,6 +18,7 @@ public class SmallBus extends Bus {
    */
   public SmallBus(int id, Line line, int capacity, double speed) {
     super(id, line, capacity, speed);
+    this.color = Color.RED; //initialize it
   }
 
   /**
