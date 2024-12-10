@@ -150,7 +150,8 @@ public class VehicleConcreteSubjectTest {
     subject.notifyObservers();
 
 
-    assertEquals(0, subject.getObservers().size(), "Observer should be removed after trip completion.");
+    assertEquals(0, subject.getObservers().size(),
+        "Observer should be removed after trip completion.");
   }
 
 }

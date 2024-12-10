@@ -1,8 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
+import java.awt.Color;
 import java.io.PrintStream;
 
-import java.awt.Color;
 
 public class VehicleTestImpl extends Vehicle {
 
@@ -31,7 +31,7 @@ public class VehicleTestImpl extends Vehicle {
     return 0;
   }
 
-  public Color getColor(){
-    return new Color(0,0,0);
+  public Color getColor() {
+    return new Color(0, 0, 0);
   }
 }

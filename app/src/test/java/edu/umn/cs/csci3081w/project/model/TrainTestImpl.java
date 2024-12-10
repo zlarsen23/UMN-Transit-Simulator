@@ -1,8 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
+import java.awt.Color;
 import java.io.PrintStream;
 
-import java.awt.Color;
 
 public class TrainTestImpl extends Train {
   public TrainTestImpl(int id, Line line, int capacity, double speed) {
@@ -19,7 +19,7 @@ public class TrainTestImpl extends Train {
     return 0;
   }
 
-  public Color getColor(){
-    return new Color(0,0,0);
+  public Color getColor() {
+    return new Color(0, 0, 0);
   }
 }

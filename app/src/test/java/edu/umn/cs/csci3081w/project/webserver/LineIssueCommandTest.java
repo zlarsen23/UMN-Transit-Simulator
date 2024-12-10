@@ -1,21 +1,22 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+
 import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.Line;
-import edu.umn.cs.csci3081w.project.model.Route;
-import edu.umn.cs.csci3081w.project.model.Stop;
-import edu.umn.cs.csci3081w.project.model.Position;
-import edu.umn.cs.csci3081w.project.model.Issue;
-import edu.umn.cs.csci3081w.project.model.RandomPassengerGenerator;
-import edu.umn.cs.csci3081w.project.model.PassengerGenerator;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+
+
 
 public class LineIssueCommandTest {
   private VisualTransitSimulator mockSimulator;

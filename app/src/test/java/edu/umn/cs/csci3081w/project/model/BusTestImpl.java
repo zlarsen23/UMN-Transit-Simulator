@@ -1,7 +1,8 @@
 package edu.umn.cs.csci3081w.project.model;
 
-import java.io.PrintStream;
 import java.awt.Color;
+import java.io.PrintStream;
+
 
 public class BusTestImpl extends Bus {
   public BusTestImpl(int id, Line line, int capacity, double speed) {
@@ -28,7 +29,7 @@ public class BusTestImpl extends Bus {
     return 0;
   }
 
-  public Color getColor(){
-    return new Color(0,0,0);
+  public Color getColor() {
+    return new Color(0, 0, 0);
   }
 }

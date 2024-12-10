@@ -1,16 +1,16 @@
 package edu.umn.cs.csci3081w.project.webserver;
+
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import edu.umn.cs.csci3081w.project.model.*;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.Arrays;
-import static org.mockito.ArgumentMatchers.anyInt;
+import org.junit.jupiter.api.Test;
+
+
+
 public class StartCommandTest {
   @Test
   public void testExecuteWithValidInput() {

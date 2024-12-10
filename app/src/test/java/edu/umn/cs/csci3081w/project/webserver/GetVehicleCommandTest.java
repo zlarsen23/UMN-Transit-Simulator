@@ -8,11 +8,23 @@ import static org.mockito.Mockito.when;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import edu.umn.cs.csci3081w.project.model.*;
-
-import java.awt.*;
+import edu.umn.cs.csci3081w.project.model.DieselTrain;
+import edu.umn.cs.csci3081w.project.model.ElectricTrain;
+import edu.umn.cs.csci3081w.project.model.ElectricTrainDecorator;
+import edu.umn.cs.csci3081w.project.model.Issue;
+import edu.umn.cs.csci3081w.project.model.LargeBus;
+import edu.umn.cs.csci3081w.project.model.LargeBusDecorator;
+import edu.umn.cs.csci3081w.project.model.Line;
+import edu.umn.cs.csci3081w.project.model.PassengerGenerator;
+import edu.umn.cs.csci3081w.project.model.Position;
+import edu.umn.cs.csci3081w.project.model.RandomPassengerGenerator;
+import edu.umn.cs.csci3081w.project.model.Route;
+import edu.umn.cs.csci3081w.project.model.SmallBus;
+import edu.umn.cs.csci3081w.project.model.SmallBusDecorator;
+import edu.umn.cs.csci3081w.project.model.Stop;
+import edu.umn.cs.csci3081w.project.model.Vehicle;
+import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -389,13 +401,16 @@ public class GetVehicleCommandTest {
     List<Double> distances = List.of(1.0, 1.0);
     List<Double> probabilities = List.of(0.5, 0.5);
 
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorOutbound =
+        new RandomPassengerGenerator(stopsOutbound, probabilities);
     PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
 
-    Route outboundRoute = new Route(0, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route outboundRoute =
+        new Route(0, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
     Route inboundRoute = new Route(1, "InboundRoute", stopsInbound, distances, generatorInbound);
 
-    Line line = new Line(1, "Test Line", "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line line = new Line(1, "Test Line",
+        "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
 
     Vehicle smallBus = mock(SmallBus.class);
     when(smallBus.getId()).thenReturn(1);
@@ -451,13 +466,16 @@ public class GetVehicleCommandTest {
     List<Double> distances = List.of(1.0, 1.0);
     List<Double> probabilities = List.of(0.5, 0.5);
 
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorOutbound =
+        new RandomPassengerGenerator(stopsOutbound, probabilities);
     PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
 
-    Route outboundRoute = new Route(0, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route outboundRoute = new Route(0,
+        "OutboundRoute", stopsOutbound, distances, generatorOutbound);
     Route inboundRoute = new Route(1, "InboundRoute", stopsInbound, distances, generatorInbound);
 
-    Line line = new Line(1, "Test Line", "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line line = new Line(1, "Test Line",
+        "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
 
     Vehicle largeBus = mock(LargeBus.class);
     when(largeBus.getId()).thenReturn(1);
@@ -513,13 +531,16 @@ public class GetVehicleCommandTest {
     List<Double> distances = List.of(1.0, 1.0);
     List<Double> probabilities = List.of(0.5, 0.5);
 
-    PassengerGenerator generatorOutbound = new RandomPassengerGenerator(stopsOutbound, probabilities);
+    PassengerGenerator generatorOutbound =
+        new RandomPassengerGenerator(stopsOutbound, probabilities);
     PassengerGenerator generatorInbound = new RandomPassengerGenerator(stopsInbound, probabilities);
 
-    Route outboundRoute = new Route(0, "OutboundRoute", stopsOutbound, distances, generatorOutbound);
+    Route outboundRoute = new Route(0,
+        "OutboundRoute", stopsOutbound, distances, generatorOutbound);
     Route inboundRoute = new Route(1, "InboundRoute", stopsInbound, distances, generatorInbound);
 
-    Line line = new Line(1, "Test Line", "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
+    Line line = new Line(1, "Test Line",
+        "SMALL_BUS_LINE", outboundRoute, inboundRoute, new Issue());
 
     Vehicle electricTrain = mock(ElectricTrain.class);
     when(electricTrain.getId()).thenReturn(1);

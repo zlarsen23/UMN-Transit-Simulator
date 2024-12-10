@@ -2,7 +2,13 @@ package edu.umn.cs.csci3081w.project.webserver;
 
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import com.google.gson.JsonObject;
 import edu.umn.cs.csci3081w.project.model.PassengerFactory;
@@ -64,6 +70,7 @@ public class WebServerSessionTest {
 
     verify(webServerSessionSpy, atLeastOnce()).sendJson(any(JsonObject.class));
   }
+
   @Test
   public void testOnMessageWithInvalidCommand() {
     WebServerSession webServerSessionSpy = spy(new WebServerSession());
@@ -78,6 +85,7 @@ public class WebServerSessionTest {
     webServerSessionSpy.onMessage(commandFromClient.toString());
     verify(webServerSessionSpy, never()).sendJson(any(JsonObject.class));
   }
+
   /**
    * Test exception handling in onMessage.
    */

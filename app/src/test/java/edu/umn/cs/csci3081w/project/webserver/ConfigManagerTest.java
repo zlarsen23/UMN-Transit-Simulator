@@ -1,17 +1,17 @@
 package edu.umn.cs.csci3081w.project.webserver;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import edu.umn.cs.csci3081w.project.model.Counter;
 import edu.umn.cs.csci3081w.project.model.Line;
-import edu.umn.cs.csci3081w.project.model.StorageFacility;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ConfigManagerTest {
 
@@ -43,9 +43,9 @@ public class ConfigManagerTest {
     assertEquals(0, lines.size());
 
 
-
     tempConfig.delete();
   }
+
   @Test
   public void testReadConfigWithDuplicateStops() throws IOException {
 
@@ -67,4 +67,4 @@ public class ConfigManagerTest {
 
     tempConfig.delete();
   }
-  }
+}
